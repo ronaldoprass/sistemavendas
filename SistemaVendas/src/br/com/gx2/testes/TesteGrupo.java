@@ -13,9 +13,9 @@ public class TesteGrupo {
 		
 		Grupo grupo = new Grupo(4, "Teste JUnit");
 		GrupoDAO dao = DAOFactory.createGrupoDAO();
-		dao.deleteById(4);
+		//dao.deleteById(4);
 		
-		Grupo g1 = dao.findById(4);
+		Grupo g1 = dao.findById(3);
 		System.out.println(g1.getDescricaoGrupo());
 		
 

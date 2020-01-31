@@ -15,6 +15,7 @@ public class ClienteServiceImp implements ClienteService{
 		if (obj != null) {
 			ClienteDAO dao = DAOFactory.createClienteDAO();
 			dao.insert(obj);
+			retorno = true;
 		}
 
 		return retorno;

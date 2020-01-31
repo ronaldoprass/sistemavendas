@@ -15,6 +15,7 @@ public class ProdutoServiceImp implements ProdutoService{
 		if (obj != null) {
 			ProdutoDAO dao = DAOFactory.createProdutoDAO();
 			dao.insert(obj);
+			retorno = true;
 		}
 
 		return retorno;
@@ -26,6 +27,7 @@ public class ProdutoServiceImp implements ProdutoService{
 
 			ProdutoDAO dao = DAOFactory.createProdutoDAO();
 			dao.update(obj);
+			retorno = true;
 		}
 
 		return retorno;
@@ -37,6 +39,7 @@ public class ProdutoServiceImp implements ProdutoService{
 
 			ProdutoDAO dao = DAOFactory.createProdutoDAO();
 			dao.deleteById(obj);
+			retorno = true;
 			
 		}
 

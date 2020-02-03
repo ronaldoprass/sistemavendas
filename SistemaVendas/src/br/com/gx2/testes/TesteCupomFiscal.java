@@ -1,5 +1,6 @@
 package br.com.gx2.testes;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.gx2.dao.CupomFiscalDAO;
@@ -16,6 +17,7 @@ public class TesteCupomFiscal {
 		CupomFiscalDAO dao = DAOFactory.createCupomFiscalDAO();
 		ItensCupomFiscalDAO itensDao = DAOFactory.createItemCupomFiscalDAO();
 		List<CupomFiscal> cupons = dao.findAll();
+		Date data = new Date();
 		
 		
 		/*for (CupomFiscal c1 : cupons) {

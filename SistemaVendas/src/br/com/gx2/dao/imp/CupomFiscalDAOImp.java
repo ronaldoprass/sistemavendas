@@ -1,9 +1,11 @@
 package br.com.gx2.dao.imp;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +16,7 @@ import br.com.gx2.entity.CupomFiscal;
 import br.com.gx2.entity.Loja;
 import br.com.gx2.entity.Vendedor;
 import br.com.gx2.exception.DbException;
+import br.com.gx2.util.JavaDate;
 
 public class CupomFiscalDAOImp implements CupomFiscalDAO {
 
@@ -31,13 +34,14 @@ public class CupomFiscalDAOImp implements CupomFiscalDAO {
 			st = conn.prepareStatement(sql);
 			
 			st.setDouble(1, cupomFiscal.getValorTotal());
-			st.setDate(2, null);
+			//st.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
+			st.setDate(2, JavaDate.getDateParser(cupomFiscal.getEmissao()));
 			st.setInt(3, cupomFiscal.getLoja().getCodigoLoja());
 			st.setInt(4, cupomFiscal.getCliente().getCodigoCliente());
 			st.setInt(5, cupomFiscal.getVendedor().getCodigoVendedor());
 			st.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			throw new DbException(e.getMessage());
 		}
 

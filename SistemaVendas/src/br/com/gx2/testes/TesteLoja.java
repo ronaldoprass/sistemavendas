@@ -2,9 +2,9 @@ package br.com.gx2.testes;
 
 import java.util.List;
 
-import br.com.gx2.dao.DAOFactory;
-import br.com.gx2.dao.LojaDAO;
 import br.com.gx2.entity.Loja;
+import br.com.gx2.service.LojaService;
+import br.com.gx2.service.ServiceFactory;
 
 public class TesteLoja {
 
@@ -13,14 +13,13 @@ public class TesteLoja {
 
 		
 		//Injeção de dependência
-		LojaDAO dao = DAOFactory.createLojaDAO();
-		
+		LojaService service =ServiceFactory.createLojaService();
 	    
-		Loja loja = new Loja(18, "Google Play");
-		dao.deleteById(11);
+		Loja loja = new Loja(null, "Google Play");
 		
+		service.cadastrarLoja(loja);
 		
-		List<Loja> lojas = dao.findAll();
+		List<Loja> lojas = service.exibirTodasLojas();
 		
 		for (Loja l : lojas) {
 			System.out.print(l.getCodigoLoja());

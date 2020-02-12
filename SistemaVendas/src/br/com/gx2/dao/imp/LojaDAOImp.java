@@ -81,7 +81,7 @@ public class LojaDAOImp implements LojaDAO {
 			if (rs.next()) {
 				loja = new Loja();
 				loja.setCodigoLoja(rs.getInt("codigo_loja"));
-				loja.setNomeLoja("nome_loja");
+				loja.setNomeLoja(rs.getString("nome_loja"));
 
 			}
 

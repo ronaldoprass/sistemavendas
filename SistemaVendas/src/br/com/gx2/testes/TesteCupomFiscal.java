@@ -1,67 +1,41 @@
 package br.com.gx2.testes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-import br.com.gx2.dao.CupomFiscalDAO;
-import br.com.gx2.dao.DAOFactory;
-import br.com.gx2.dao.ItensCupomFiscalDAO;
+import br.com.gx2.entity.Cliente;
 import br.com.gx2.entity.CupomFiscal;
-import br.com.gx2.entity.ItensCupomFiscal;
+import br.com.gx2.entity.Loja;
+import br.com.gx2.entity.Vendedor;
+import br.com.gx2.service.ClienteService;
+import br.com.gx2.service.CupomFiscalService;
+import br.com.gx2.service.LojaService;
+import br.com.gx2.service.ServiceFactory;
+import br.com.gx2.service.VendedorService;
+import br.com.gx2.util.JavaDate;
 
 public class TesteCupomFiscal {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws ParseException {
+
+		String emissao = "02/15/2020 12:29:09";
 		
-		CupomFiscalDAO dao = DAOFactory.createCupomFiscalDAO();
-		ItensCupomFiscalDAO itensDao = DAOFactory.createItemCupomFiscalDAO();
-		List<CupomFiscal> cupons = dao.findAll();
-		Date data = new Date();
-		
-		
-		/*for (CupomFiscal c1 : cupons) {
-			System.out.print(c1.getCodigoCupom() + " - ");
-			System.out.print(c1.getEmissao() + " - ");
-			System.out.print(c1.getLoja().getNomeLoja() + " - ");
-			System.out.print(c1.getVendedor().getNomeVendedor() + " - ");
-			System.out.print(c1.getCliente().getNomeCliente() + " - ");
-			System.out.println(c1.getCliente().getCpf());
-		}
-		
-		CupomFiscal c1 = dao.findById(23);
-		System.out.print(c1.getCodigoCupom() + " - ");
-		System.out.print(c1.getEmissao() + " - ");
-		System.out.print(c1.getValorTotal() + " - ");
-		System.out.print(c1.getLoja().getNomeLoja() + " - ");
-		System.out.print(c1.getVendedor().getNomeVendedor() + " - ");
-		System.out.print(c1.getCliente().getNomeCliente() + " - ");
-		System.out.println(c1.getCliente().getCpf());
-		
-		c1.setValorTotal(10000.0);*/
-		//dao.update(c1);
-		Integer codigo = 3;
-		CupomFiscal cp = dao.findById(codigo);
-		
-		
-		System.out.print(cp.getCodigoCupom() + " - ");
-		System.out.print(cp.getEmissao() + " - ");
-		System.out.print(cp.getValorTotal() + " - ");
-		System.out.print(cp.getLoja().getNomeLoja() + " - ");
-		System.out.print(cp.getVendedor().getNomeVendedor() + " - ");
-		System.out.print(cp.getCliente().getNomeCliente() + " - ");
-		System.out.println(cp.getCliente().getCpf());
-		cp.setItensCupomFiscal(itensDao.findById(cp.getCodigoCupom()));
-		
-		List<ItensCupomFiscal> itens = cp.getItensCupomFiscal();
-		for (ItensCupomFiscal its : itens) {
-			System.out.print(its.getProduto().getCodigoProduto() + " - ");
-			System.out.print(its.getProduto().getDescricaoProduto() + " - ");
-			System.out.print(its.getQuantidade() + " - ");
-			System.out.print(its.getValorUnitario()+ " - ");
-			System.out.println(its.getProduto().getGrupo().getDescricaoGrupo());
-		}
-		
+		LojaService lojaService = ServiceFactory.createLojaService();
+		Loja loja = lojaService.pesquisarLojaId(1);
+
+		ClienteService clienteService = ServiceFactory.createClienteService();
+		Cliente cliente = clienteService.pesquisarClienteId(1);
+
+		VendedorService vendedorService = ServiceFactory.createVendedorService();
+		Vendedor vendedor = vendedorService.pesquisarVendedorId(1);
+
+		CupomFiscalService cupomService = ServiceFactory.createCupomFiscalService();
+		CupomFiscal cupom = new CupomFiscal(null, 100.0, JavaDate.getDate(emissao), loja, cliente, vendedor);
+
+		cupomService.cadastrarCupomFiscal(cupom);
+
 	}
 
 }
